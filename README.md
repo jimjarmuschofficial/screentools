@@ -66,10 +66,8 @@ sudo chmod +x /usr/local/bin/screentools-*
 
 ## Notes
 
-- Recordings capture system audio (not microphone)
-- Works with headphones, speakers, or built-in audio
-- Videos saved as MP4 with timestamp filenames
-- Example: `recording-20260129-143022.mp4`
+- Videos saved as MP4 with timestamp filenames (Example: `recording-20260129-143022.mp4`)
+- Vibe-coded slop cobbled together by Claude because no current screenshot tools were as intuitive as microsoft's snipping tool
 
 ## Uninstall
 
