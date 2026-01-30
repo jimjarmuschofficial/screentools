@@ -22,10 +22,6 @@ read -r X Y W H G ID <<< "$SELECTION"
 # Show countdown notification
 notify-send "Screen Recording" "Starting in 3 seconds..." -i media-record -t 1000
 sleep 1
-notify-send "Screen Recording" "Starting in 2 seconds..." -i media-record -t 1000
-sleep 1
-notify-send "Screen Recording" "Starting in 1 second..." -i media-record -t 1000
-sleep 1
 
 # Create output directory if it doesn't exist
 RECORDINGS_DIR="$HOME/Videos/ScreenRecordings"
