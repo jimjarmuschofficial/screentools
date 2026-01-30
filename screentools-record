@@ -1,0 +1,63 @@
+#!/bin/bash
+# Video recording script - records system audio from whatever output is active
+# Run again to stop recording
+
+# Check if already recording
+if pgrep -f "ffmpeg.*x11grab" > /dev/null; then
+    # Already recording, so stop it
+    pkill -SIGINT -f "ffmpeg.*x11grab"
+    notify-send "Screen Recording" "Recording stopped and saved" -i media-playback-stop -t 3000
+    exit 0
+fi
+
+# Get selection coordinates using slop
+SELECTION=$(slop -f "%x %y %w %h %g %i")
+if [ $? -ne 0 ]; then
+    # User cancelled selection (pressed Esc)
+    exit 1
+fi
+
+read -r X Y W H G ID <<< "$SELECTION"
+
+# Show countdown notification
+notify-send "Screen Recording" "Starting in 3 seconds..." -i media-record -t 1000
+sleep 1
+notify-send "Screen Recording" "Starting in 2 seconds..." -i media-record -t 1000
+sleep 1
+notify-send "Screen Recording" "Starting in 1 second..." -i media-record -t 1000
+sleep 1
+
+# Create output directory if it doesn't exist
+RECORDINGS_DIR="$HOME/Videos/ScreenRecordings"
+mkdir -p "$RECORDINGS_DIR"
+
+# Generate filename with timestamp (absolute path)
+FILENAME="$RECORDINGS_DIR/recording-$(date +%Y%m%d-%H%M%S).mp4"
+
+# Get the default audio sink (whatever you're currently listening to)
+DEFAULT_SINK=$(pactl get-default-sink)
+
+# Get the monitor source for that sink (this is what captures the audio)
+AUDIO_SOURCE="${DEFAULT_SINK}.monitor"
+
+# Start recording notification
+notify-send "Screen Recording" "Recording! Press Alt+PrtScn to stop." -i media-record -t 3000
+
+# Record with ffmpeg - captures audio from current output device
+ffmpeg -f x11grab -s "${W}x${H}" -i :0.0+${X},${Y} \
+       -f pulse -i "$AUDIO_SOURCE" \
+       -c:v libx264 -preset ultrafast -crf 18 \
+       -c:a aac -b:a 192k \
+       "$FILENAME" 2>/dev/null
+
+# Verify file was created
+if [ ! -f "$FILENAME" ]; then
+    notify-send "Screen Recording" "Error: Recording file not created" -i dialog-error -t 3000
+    exit 1
+fi
+
+# Open the recordings folder in file manager
+xdg-open "$RECORDINGS_DIR" &
+
+# Show completion notification
+notify-send "Screen Recording" "Recording saved and folder opened!\n$FILENAME" -i media-record -t 5000

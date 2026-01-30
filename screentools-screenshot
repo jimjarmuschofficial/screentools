@@ -1,0 +1,14 @@
+#!/bin/bash
+# Screenshot script that copies selection directly to clipboard
+# Similar to Windows Snipping Tool
+
+# Take screenshot of selected area and copy to clipboard
+# The -s flag allows selection, and maim will return non-zero if cancelled
+maim -s | xclip -selection clipboard -t image/png
+
+# Check if maim (not xclip) was successful using PIPESTATUS
+# PIPESTATUS[0] is the exit code of maim
+if [ ${PIPESTATUS[0]} -eq 0 ]; then
+    # Show success notification only if screenshot was taken
+    notify-send "Screenshot" "Image copied to clipboard" -i screenshot -t 2000
+fi
