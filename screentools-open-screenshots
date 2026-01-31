@@ -1,0 +1,11 @@
+#!/bin/bash
+# Open screenshots folder
+# "Control your print screens" - Ctrl+PrtScn
+
+SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"
+
+# Create directory if it doesn't exist
+mkdir -p "$SCREENSHOTS_DIR"
+
+# Open in file manager
+xdg-open "$SCREENSHOTS_DIR"
