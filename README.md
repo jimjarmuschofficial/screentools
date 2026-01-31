@@ -1,73 +1,91 @@
 # ScreenTools
 
-Simple screenshot and screen recording tools for Linux Mint / Ubuntu.
+Simple screenshot and screen recording tools for Linux Mint and Ubuntu.
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Platform](https://img.shields.io/badge/platform-Linux-lightgrey.svg)
 
 ## Features
 
-- **Screenshot Tool** (PrtScn): Select area and copy to clipboard
-- **Screen Recording** (Alt+PrtScn): Record screen area with audio
+- 🖼️ **Screenshot Tool** - Press PrtScn, select area, auto-copy to clipboard AND save to file
+- 🎥 **Screen Recording** - Press Alt+PrtScn to start/stop recording with audio
+- 📂 **Quick Access** - Press Ctrl+PrtScn to open your screenshots folder
+- 🎯 **Simple** - Works like Windows Snipping Tool
+- 🔊 **Smart Audio** - Auto-captures from current output (headphones/speakers/built-in)
+- ⚡ **Fast** - 3 second countdown, instant screenshot
+- 📁 **Organized** - Screenshots: `~/Pictures/Screenshots/`, Recordings: `~/Videos/ScreenRecordings/`
 
-## Installation
+## Quick Install (Linux Mint / Ubuntu)
 
-### From .deb package:
+### Method 1: .deb Package (Recommended)
+
+1. Download `screentools_1.2.0_all.deb` from [Releases](https://github.com/jimjarmuschofficial/screentools/releases)
+2. Double-click to install, or:
 ```bash
-sudo dpkg -i screentools_1.0.0_all.deb
-sudo apt-get install -f  # Install dependencies if needed
+sudo dpkg -i screentools_1.2.0_all.deb
+sudo apt-get install -f
 ```
+3. Log out and back in
+4. Done! PrtScn, Alt+PrtScn, and Ctrl+PrtScn now work
 
-### Manual Setup:
+### Method 2: Install Script
 
-**Dependencies:**
 ```bash
-sudo apt install maim xclip slop ffmpeg pulseaudio-utils libnotify-bin
+wget https://github.com/jimjarmuschofficial/screentools/releases/download/v1.2.0/screentools-1.2.0.tar.gz
+tar -xzf screentools-1.2.0.tar.gz
+cd screentools-dist
+./install.sh
 ```
-
-**Install scripts:**
-```bash
-sudo cp screentools-screenshot /usr/local/bin/
-sudo cp screentools-record /usr/local/bin/
-sudo chmod +x /usr/local/bin/screentools-*
-```
-
-**Set up keyboard shortcuts:**
-
-1. Open System Settings → Keyboard → Shortcuts
-2. Go to 'Screenshots' and disable default PrtScn bindings
-3. Go to 'Custom Shortcuts' and add:
-
-   **Screenshot:**
-   - Name: Screenshot to Clipboard
-   - Command: `screentools-screenshot`
-   - Binding: PrtScn
-
-   **Screen Recording:**
-   - Name: Record Screen Area
-   - Command: `screentools-record`
-   - Binding: Alt+PrtScn
 
 ## Usage
 
 ### Screenshots
-1. Press **PrtScn**
-2. Crosshair appears - click a window or drag to select area
-3. Screenshot copied to clipboard
-4. Paste with Ctrl+V
+- Press **PrtScn**
+- Select area with crosshair (drag or click window)
+- Image copied to clipboard AND saved to `~/Pictures/Screenshots/`
+- Paste anywhere with Ctrl+V
+- Press Esc to cancel
 
 ### Screen Recording
-1. Press **Alt+PrtScn**
-2. Crosshair appears - select area
-3. 3-2-1 countdown
-4. Recording starts (captures system audio from current output)
-5. Press **Alt+PrtScn** again to stop
-6. Video saved to `~/Videos/ScreenRecordings/`
-7. Folder opens automatically
+- Press **Alt+PrtScn** to start
+- Select area with crosshair
+- 3 second countdown
+- Recording starts (with system audio)
+- Press **Alt+PrtScn** again to stop
+- Folder opens with your video
 
-**Cancel:** Press Esc during selection
+### Open Screenshots Folder
+- Press **Ctrl+PrtScn**
+- Your screenshots folder opens instantly
+- "Control your print screens" 📂
 
-## Notes
+## System Requirements
 
-- Videos saved as MP4 with timestamp filenames (Example: `recording-20260129-143022.mp4`)
-- Vibe-coded slop cobbled together by Claude because no current screenshot tools were as intuitive as microsoft's snipping tool
+- Linux Mint 22+ or Ubuntu 24.04+
+- Cinnamon, GNOME, or compatible desktop
+- Dependencies (auto-installed):
+  - maim
+  - xclip
+  - slop
+  - ffmpeg
+  - pulseaudio-utils
+
+## How It Works
+
+**Screenshot:** Uses `maim` for selection + `xclip` for clipboard  
+**Recording:** Uses `slop` for selection + `ffmpeg` for recording  
+**Audio:** Dynamically captures from your current audio output using PulseAudio monitors
+
+## Manual Keyboard Setup
+
+If auto-configuration doesn't work:
+
+1. Open System Settings → Keyboard → Shortcuts
+2. Disable default PrtScn bindings under "Screenshots"
+3. Add custom shortcuts:
+   - **Name:** Screenshot | **Command:** `screentools-screenshot` | **Key:** PrtScn
+   - **Name:** Recording | **Command:** `screentools-record` | **Key:** Alt+PrtScn
+   - **Name:** Open Screenshots | **Command:** `screentools-open-screenshots` | **Key:** Ctrl+PrtScn
 
 ## Uninstall
 
@@ -75,6 +93,38 @@ sudo chmod +x /usr/local/bin/screentools-*
 sudo apt remove screentools
 ```
 
+## Troubleshooting
+
+**Shortcuts don't work:**
+- Log out and back in
+- Check for conflicting shortcuts in System Settings
+- Run `screentools-screenshot` in terminal to test
+
+**No audio in recordings:**
+- Check audio is playing during recording
+- Run `pactl get-default-sink` to verify audio output detected
+
+**Recording folder doesn't open:**
+- Manually check `~/Videos/ScreenRecordings/`
+
+## Building from Source
+
+```bash
+git clone https://github.com/jimjarmuschofficial/screentools.git
+cd screentools
+# Scripts are in screentools-package/usr/local/bin/
+```
+
+## Contributing
+
+Pull requests welcome! Please test on Linux Mint/Ubuntu before submitting.
+
 ## License
 
-Free to use and modify.
+MIT License - Free to use, modify, and distribute.
+
+## Credits
+
+Created for Linux Mint users who want Windows-style screenshot and recording tools.
+
+Uses: maim, slop, xclip, ffmpeg, PulseAudio
