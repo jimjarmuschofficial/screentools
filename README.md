@@ -19,20 +19,23 @@ Simple screenshot and screen recording tools for Linux Mint and Ubuntu.
 
 ### Method 1: .deb Package (Recommended)
 
-1. Download `screentools_1.2.0_all.deb` from [Releases](https://github.com/jimjarmuschofficial/screentools/releases)
-2. Double-click to install, or:
+1. Download `screentools_1.2.3_all.deb` from [Releases](https://github.com/jimjarmuschofficial/screentools/releases)
+2. Install it:
 ```bash
-sudo dpkg -i screentools_1.2.0_all.deb
+sudo dpkg -i screentools_1.2.3_all.deb
 sudo apt-get install -f
 ```
 3. Log out and back in
-4. Done! PrtScn, Alt+PrtScn, and Ctrl+PrtScn now work
+4. Done! All shortcuts automatically configured on first login
+
+**On Linux Mint/Cinnamon:** All three shortcuts configure automatically  
+**On other desktops:** Run `screentools-setup` after logging in
 
 ### Method 2: Install Script
 
 ```bash
-wget https://github.com/jimjarmuschofficial/screentools/releases/download/v1.2.0/screentools-1.2.0.tar.gz
-tar -xzf screentools-1.2.0.tar.gz
+wget https://github.com/jimjarmuschofficial/screentools/releases/download/v1.2.3/screentools-1.2.3.tar.gz
+tar -xzf screentools-1.2.3.tar.gz
 cd screentools-dist
 ./install.sh
 ```
