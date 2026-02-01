@@ -34,10 +34,11 @@ sudo apt-get install -f
 ### Method 2: Install Script
 
 ```bash
-wget https://github.com/jimjarmuschofficial/screentools/releases/download/v1.2.3/screentools-1.2.3.tar.gz
-tar -xzf screentools-1.2.3.tar.gz
-cd screentools-dist
-./install.sh
+wget https://github.com/jimjarmuschofficial/screentools/releases/latest/download/screentools_1.2.3_all.deb
+sudo dpkg -i screentools_1.2.3_all.deb
+sudo apt-get install -f -y
+rm screentools_1.2.3_all.deb
+echo "Done! Log out and back in."
 ```
 
 ## Usage
