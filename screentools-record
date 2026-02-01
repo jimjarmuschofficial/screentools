@@ -1,4 +1,14 @@
 #!/bin/bash
+# Open screenshots folder
+# "Control your print screens" - Ctrl+PrtScn
+
+SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"
+
+# Create directory if it doesn't exist
+mkdir -p "$SCREENSHOTS_DIR"
+
+# Open in file manager
+xdg-open "$SCREENSHOTS_DIR"#!/bin/bash
 # Video recording script - records system audio from whatever output is active
 # Run again to stop recording
 
@@ -19,9 +29,9 @@ fi
 
 read -r X Y W H G ID <<< "$SELECTION"
 
-# Show countdown notification
-notify-send "Screen Recording" "Starting in 3 seconds..." -i media-record -t 1000
-sleep 1
+# Show recording notification
+notify-send "Screen Recording" "Starting in 3 seconds..." -i media-record -t 3000
+sleep 3
 
 # Create output directory if it doesn't exist
 RECORDINGS_DIR="$HOME/Videos/ScreenRecordings"
